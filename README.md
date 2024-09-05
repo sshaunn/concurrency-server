@@ -1,7 +1,23 @@
-install:
-go mod download
-go mod tidy
+## Installation
 
-run:
-export ENVIORNMENT=local
+To set up the project, follow these steps:
+
+1. Clone the repository:
+   git clone https://github.com/yourusername/your-repo-name.git
+   cd your-repo-name
+
+2. Install dependencies:
+   go mod download
+   go mod tidy
+
+## Configuration
+
+Before running the application, make sure to set up the environment:
+export ENVIRONMENT=local
+
+You can create different environment configurations by creating `.env.{environment}` files.
+
+## Usage
+
+To run the application:
 go run ./cmd/api/main.go
