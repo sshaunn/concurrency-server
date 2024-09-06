@@ -21,3 +21,14 @@ You can create different environment configurations by creating `.env.{environme
 
 To run the application:
 go run ./cmd/api/main.go
+
+## Gatling performance test
+
+Go to the gatling directory:
+cd performance
+
+Build the app:
+./gradlew build
+
+To run the gatling app:
+./gradlew gatlingRun

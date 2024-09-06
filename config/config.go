@@ -11,11 +11,13 @@ import (
 var config *Config
 
 type Config struct {
-	ServerPort            string
-	EventingToolsBaseURL  string
-	EventingToolsEndpoint string
-	DownstreamBaseURL     string
-	DownstreamEndpoint    string
+	ServerPort             string
+	EventingToolsBaseURL_1 string
+	EventingToolsBaseURL_2 string
+	EventingToolsBaseURL_3 string
+	EventingToolsEndpoint  string
+	DownstreamBaseURL      string
+	DownstreamEndpoint     string
 }
 
 func init() {
@@ -38,11 +40,13 @@ func init() {
 	}
 
 	config = &Config{
-		ServerPort:            os.Getenv("SERVER_PORT"),
-		EventingToolsBaseURL:  os.Getenv("SERVICE_EVENTING_TOOLS_BASE_URL"),
-		EventingToolsEndpoint: os.Getenv("SERVICE_EVENTING_TOOLS_ENDPOINT"),
-		DownstreamBaseURL:     os.Getenv("SERVICE_DOWNSTREAM_BASE_URL"),
-		DownstreamEndpoint:    os.Getenv("SERVICE_DOWNSTREAM_ENDPOINT"),
+		ServerPort:             os.Getenv("SERVER_PORT"),
+		EventingToolsBaseURL_1: os.Getenv("SERVICE_EVENTING_TOOLS_BASE_URL_1"),
+		EventingToolsBaseURL_2: os.Getenv("SERVICE_EVENTING_TOOLS_BASE_URL_2"),
+		EventingToolsBaseURL_3: os.Getenv("SERVICE_EVENTING_TOOLS_BASE_URL_3"),
+		EventingToolsEndpoint:  os.Getenv("SERVICE_EVENTING_TOOLS_ENDPOINT"),
+		DownstreamBaseURL:      os.Getenv("SERVICE_DOWNSTREAM_BASE_URL"),
+		DownstreamEndpoint:     os.Getenv("SERVICE_DOWNSTREAM_ENDPOINT"),
 	}
 
 	// Validate required fields
