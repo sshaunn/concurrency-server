@@ -12,6 +12,7 @@ func Routes(router *gin.Engine) {
 		queue := v1.Group("/queue")
 		{
 			queue.POST("/get", handler.QueueHandler.GetQueue)
+			queue.POST("/generate", handler.QueueHandler.GenerateQueue)
 			queue.GET("/test", func(c *gin.Context) {
 				c.JSON(200, gin.H{
 					"message": "test successful",

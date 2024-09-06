@@ -1,2 +1,9 @@
 .vscode/*
 .editorconfig
+.metals/*
+.scala-build/*
+performance/target/*
+performance/project/*
+performance/.gradle/*
+performance/build/*
+.idea/*

@@ -16,7 +16,7 @@ import (
 var QueueService QueueServiceInterface
 
 type QueueServiceInterface interface {
-	GenerateQueue(*models.Queue) (map[string]interface{}, error)
+	GenerateQueue([]byte) (map[string]interface{}, error)
 	GetQueue(*models.Queue) (map[string]interface{}, error)
 }
 
@@ -40,14 +40,8 @@ func init() {
 	QueueService = NewQueueService(baseURL, endpoint)
 }
 
-func (qsi *queueServiceImpl) GenerateQueue(queue *models.Queue) (map[string]interface{}, error) {
-	jsonData, err := json.Marshal(queue)
-	if err != nil {
-		log.Panicf("Failed marshalling queue with error=%v", err.Error())
-		return nil, err
-	}
-
-	res, err := qsi.client.Post(qsi.baseURL, common.ContentType, bytes.NewBuffer(jsonData))
+func (qsi *queueServiceImpl) GenerateQueue(queue []byte) (map[string]interface{}, error) {
+	res, err := qsi.client.Post(qsi.baseURL+qsi.endpoint, common.ContentType, bytes.NewBuffer(queue))
 	if err != nil {
 		log.Panicf("Error making request with error=%v", err.Error())
 		return nil, err

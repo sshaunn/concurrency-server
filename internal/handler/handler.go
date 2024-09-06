@@ -27,6 +27,23 @@ func newQueueHandler(queueService service.QueueServiceInterface) *queueHandler {
 	return &queueHandler{queueService: queueService}
 }
 
+func (qh *queueHandler) GenerateQueue(c *gin.Context) {
+	body, err := io.ReadAll(c.Request.Body)
+	if err != nil {
+		log.Printf("Error reading body: %v", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"message": common.INTERNAL_SERVER_ERROR_MESSAGE})
+		return
+	}
+
+	res, err := qh.queueService.GenerateQueue(body)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": common.INTERNAL_SERVER_ERROR_MESSAGE})
+		return
+	}
+
+	c.JSON(http.StatusAccepted, res)
+}
+
 func (qh *queueHandler) GetQueue(c *gin.Context) {
 	body, err := io.ReadAll(c.Request.Body)
 	if err != nil {

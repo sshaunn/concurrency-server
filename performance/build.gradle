@@ -1,0 +1,53 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'scala'
+    id 'io.gatling.gradle' version '3.10.5.1'
+}
+
+apply plugin: 'io.gatling.gradle'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.scala-lang:scala-library:2.13.6'
+    gatling 'io.gatling:gatling-core:3.7.6'
+    gatling 'io.gatling.highcharts:gatling-charts-highcharts:3.7.6'
+}
+
+gatling {
+    logLevel = 'WARN'
+    logHttp = 'NONE'
+    
+    sourceSets {
+        gatling {
+            scala {
+                srcDirs = ['src/gatling/scala']
+            }
+            resources {
+                srcDirs = ['src/gatling/resources']
+            }
+        }
+    }
+
+    simulations = {
+        include "**/*Simulation.scala"
+    }
+}
+
+//tasks.withType(io.gatling.gradle.GatlingRunTask) {
+//    doFirst {
+//        // Set the reports directory using a system property
+//        systemProperty 'gatling.core.directory.results', "${buildDir}/gatling-results"
+//    }
+//}
+
+//tasks.withType(io.gatling.gradle.GatlingRunTask) {
+//    inputs.files(fileTree("src").include("**/*.scala"))
+//}
