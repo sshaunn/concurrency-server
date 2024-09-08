@@ -30,6 +30,24 @@ class QueueGenerationSimulation extends Simulation {
             |            "firstname": "John",
             |            "lastname": "Doe",
             |            "email": "tt@tt.com"
+            |        },
+            |        {
+            |            "userid": "userid-user-3",
+            |            "firstname": "Alice",
+            |            "lastname": "Smith",
+            |            "email": "alice.smith@example.com"
+            |        },
+            |        {
+            |            "userid": "userid-user-4",
+            |            "firstname": "Bob",
+            |            "lastname": "Johnson",
+            |            "email": "bob.johnson@example.com"
+            |        },
+            |        {
+            |            "userid": "userid-user-5",
+            |            "firstname": "Emma",
+            |            "lastname": "Wilson",
+            |            "email": "emma.wilson@example.com"
             |        }
             |    ]
             |}""".stripMargin))

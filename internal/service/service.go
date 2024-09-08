@@ -7,7 +7,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"sync/atomic"
 	"time"
 
 	"concurrency-server/internal/common"
@@ -15,11 +14,10 @@ import (
 	"concurrency-server/internal/util"
 )
 
-var (
-	QueueService QueueServiceInterface
-	counter      uint64
-	backends     = []string{os.Getenv(common.SERVICE_EVENTING_TOOLS_BASE_URL_1), os.Getenv(common.SERVICE_EVENTING_TOOLS_BASE_URL_2), os.Getenv(common.SERVICE_EVENTING_TOOLS_BASE_URL_3)}
-)
+var QueueService QueueServiceInterface
+
+// counter      uint64
+// backends     = []string{os.Getenv(common.SERVICE_EVENTING_TOOLS_BASE_URL_1), os.Getenv(common.SERVICE_EVENTING_TOOLS_BASE_URL_2), os.Getenv(common.SERVICE_EVENTING_TOOLS_BASE_URL_3)}
 
 type QueueServiceInterface interface {
 	GenerateQueue([]byte) (map[string]interface{}, error)
@@ -46,13 +44,13 @@ func init() {
 	QueueService = NewQueueService(baseURL, endpoint)
 }
 
-func getNextBackend() string {
-	return backends[int(atomic.AddUint64(&counter, 1)%uint64(len(backends)))]
-}
+// func getNextBackend() string {
+// 	return backends[int(atomic.AddUint64(&counter, 1)%uint64(len(backends)))]
+// }
 
 func (qsi *queueServiceImpl) GenerateQueue(queue []byte) (map[string]interface{}, error) {
-	backend := getNextBackend()
-	res, err := qsi.client.Post(backend+qsi.endpoint, common.ContentType, bytes.NewBuffer(queue))
+	// backend := getNextBackend()
+	res, err := qsi.client.Post(os.Getenv(common.SERVICE_EVENTING_TOOLS_BASE_URL_1)+qsi.endpoint, common.ContentType, bytes.NewBuffer(queue))
 	if err != nil {
 		log.Panicf("Error making request with error=%v", err.Error())
 		return nil, err
